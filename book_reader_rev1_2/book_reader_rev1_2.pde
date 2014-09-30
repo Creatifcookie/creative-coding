@@ -153,8 +153,7 @@ void splashScreen() {
     textAlign(LEFT);
     fill(0);
     text(instructions.substring(78, 130), 50, ( (height / 2) - 150 ) + 250 );
-    
-   
+
 }
 
 // load a text file and spit it out again, all cleaned up
