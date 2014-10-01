@@ -40,7 +40,7 @@ void setup()
   //
 
   raw = loadStrings("treasure-island-raw.txt");
-  //printarray(raw);
+  printarray(raw);
 }
 
 void draw()
