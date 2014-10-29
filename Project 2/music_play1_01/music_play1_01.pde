@@ -4,10 +4,10 @@
  * music_play:                                                                                    *
  *                                                                                                *
  * Programmer: Robert Hieger                                                                      *
- * Music Play v1.0                                                                                *
+ * Music Play v1.01                                                                               *
  *                                                                                                *
- * Begun: October 8, 2014
- * Completed: October 21, 2014
+ * Begun: October 22, 2014
+ * Completed: October 29, 2014
  *                                                                                                *
  * Program Objectives:                                                                            *
  *                                                                                                *
@@ -17,10 +17,23 @@
  *                                                                                                *
  * VERY TALL ORDER, but somewhere to begin.                                                       *
  *                                                                                                *
+ * In version 1.01, my goals are to:                                                              *
+ *                                                                                                *
+ * 1) Break the programming problem into subsystems, as follows:                                  *
+ *                                                                                                *
+ *      a) Play musical file--MIDI or MP3                                                         *
+ *      b) Render musical notation for the piece as it is played.                                 *
+ *      c) Musical data visualization layer--background reacts to frequency and rhythm.           *
+ *                                                                                                *
+ *                                                                                                *
+ * 2) First attempts at abstraction of functions into classes.                                    *
+ *                                                                                                *
  **************************************************************************************************
 */
 
-// GLOBAL VARIABLES -- YET TO BE DEFINED
+  // Image for Treble Cleff
+  
+  PImage treble;
 
 void setup() {
   
@@ -36,6 +49,8 @@ void setup() {
   textFont(titleFace, 32);
   fill(0);
   
+  treble = loadImage("treble-clef.png");
+  
   
   // First I must learn how to crawl, then to walk,
   // then to run. I am going to attempt to hardcode
@@ -48,12 +63,29 @@ void setup() {
 
 void draw() {
   
-  Title("Anarchia Entrance Theme");
+  //Title("Anarchia Entrance Theme");
+  
+  Name Title = new Name("Anarchia Entrance Theme", 50.);
+  
+  Title.drawHead();
   
   stroke(2);      // Make line stroke 2 pixels.
   smooth();       // Apply antialiasing.
     
   drawStaff(75);
+  smooth();
+  image(treble, 45, 50);
+  treble.resize(62, 80);
+  smooth();
+  drawStaff(165);
+  image(treble, 45, 140);
+  treble.resize(62, 80);
+  smooth();
+  drawStaff(255);
+  image(treble, 45, 230);
+  treble.resize(62, 80);
+  smooth();
+  closeSystem(50, 75, 50, 287);  // Draw bar line to connect system.
   
 }
 
@@ -98,3 +130,10 @@ void drawStaff(float above) {
   }  // end for
   
 }  // end drawStaff(float above)
+
+void closeSystem(float x1, float y1, float x2, float y2) {
+  
+  line(x1, y1, x2, y2);
+  smooth();
+ 
+}
