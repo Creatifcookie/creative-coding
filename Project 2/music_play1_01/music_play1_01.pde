@@ -7,7 +7,7 @@
  * Music Play v1.01                                                                               *
  *                                                                                                *
  * Begun: October 22, 2014
- * Completed: October 29, 2014
+ * Completed: October 30, 2014
  *                                                                                                *
  * Program Objectives:                                                                            *
  *                                                                                                *
@@ -65,27 +65,46 @@ void draw() {
   
   //Title("Anarchia Entrance Theme");
   
+  // STANDARDIZED MEASUREMENTS FOR STAFF AND SYSTEM
+  // SPACINGS AS FOLLOWS:
+  
+  // Staff Line: 2 pixels thick
+  // Space Between Lines: 8 pixels
+  // 5 Lines Per Staff
+  // 50 pixels height for each staff
+  // 50 pixels between each staff
+  // 3 staves per system
+  // Total Height per system: 250 pixels
+  
   Name Title = new Name("Anarchia Entrance Theme", 50.);
   
   Title.drawHead();
   
   stroke(2);      // Make line stroke 2 pixels.
   smooth();       // Apply antialiasing.
+  
+  Staff staff1 = new Staff(75);      // Instantiate staff1
+  Staff staff2 = new Staff(175);     // Instantiate staff2
+  Staff staff3 = new Staff(275);     // Instantiate staff3 
+  
+  staff1.drawStaff();  // Draw the first staff.
+  staff2.drawStaff();  // Draw the second staff.
+  staff3.drawStaff();  // Draw the third staff.
     
-  drawStaff(75);
-  smooth();
+  //drawStaff(75);
+  //smooth();
   image(treble, 45, 50);
   treble.resize(62, 80);
   smooth();
-  drawStaff(165);
-  image(treble, 45, 140);
+  //drawStaff(165);
+  image(treble, 45, 150);
   treble.resize(62, 80);
   smooth();
-  drawStaff(255);
-  image(treble, 45, 230);
+  //drawStaff(255);
+  image(treble, 45, 250);
   treble.resize(62, 80);
   smooth();
-  closeSystem(50, 75, 50, 287);  // Draw bar line to connect system.
+  closeSystem(50, 75, 50, 307);  // Draw bar line to connect system.
   
 }
 
@@ -96,14 +115,14 @@ void draw() {
  *
 */
 
-void Title(String titleString) {
+/*void Title(String titleString) {
   
   // Internal Variable
   
   String title = titleString;
   text(title, ((width / 2) -title.length()) /2, 50);
   
-}
+}*/
 
 void drawStaff(float above) {
   
