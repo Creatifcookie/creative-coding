@@ -106,6 +106,11 @@ void draw() {
   smooth();
   closeSystem(50, 75, 50, 307);  // Draw bar line to connect system.
   
+  // NOTE: Not too clear yet why the ending y-Coordinate above is 307.
+  // From my figurings, it would seem it should have been 325, but
+  // that was way off. Also note that the closeSystem() function still
+  // needs to be abstracted.
+  
 }
 
 /*
