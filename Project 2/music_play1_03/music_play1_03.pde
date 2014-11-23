@@ -6,8 +6,8 @@
  * Programmer: Robert Hieger                                                                      *
  * Music Play v1.02                                                                               *
  *                                                                                                *
- * Begun: November 2, 2014
- * Completed: November 23, 2014
+ * Begun: November 23, 2014
+ * Completed: ??????, 2014
  *                                                                                                *
  * Program Objectives:                                                                            *
  *                                                                                                *
