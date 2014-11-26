@@ -45,7 +45,7 @@ void setup() {
       
       anarchiaSystems[i] = loadImage("anarchia-system" + (i + 1) + ".png");
       
-      // println( "Loaded" + loadImage("anarchia-system" + (i + 1) + ".png") );
+     // println( "Loaded" + loadImage("anarchia-system" + (i + 1) + ".png") );
       
     }  // end for
   
@@ -69,6 +69,8 @@ void draw()
   byLine.byDraw();
   
   image(anarchiaSystems[0], 65, 128);
-  image(anarchiaSystems[1], 10, 225);
+  image(anarchiaSystems[1], 20, 225);
+  image(anarchiaSystems[2], 20, 415);
+  image(anarchiaSystems[3], 20, 615);
   
 }
