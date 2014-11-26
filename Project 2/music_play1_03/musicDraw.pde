@@ -1,5 +1,12 @@
-// My first attempts at abstracting functions to objects
-// for music drawing subsystem.
+/*
+ * musicDraw Library:
+ *
+ * Contained within this library are the classes responsible for drawing the page title,
+ * subtitle, and by-line. Additionally, it includes the classes that draw individual
+ * systems of music notation and methods to mask and reveal portions of music systems
+ * in time to the music played by the midiLib module.
+*/
+
 
 // The Name class may be instantiated to create and place a title on the first sheet
 // of music. It takes two parameters--the String name and a float vertPos, which stores
@@ -7,13 +14,20 @@
 
 class Name {
   
+  PFont titleFace;        // Declare font object.
+
   String nameString;  // title
   float yPos;         // y-Coordinate
   
   Name(String name, float vertPos) {
-   
-      nameString = name;
-      yPos = vertPos; 
+
+    titleFace = createFont("HelveticaNeue Thin", 28);
+     //titleFace = loadFont("HelveticaNeue-Thin-24.vlw");
+     textFont(titleFace);
+     fill(0);
+     
+     nameString = name;
+     yPos = vertPos; 
       
   }  // end constructor
  
@@ -21,11 +35,45 @@ class Name {
 
   void drawHead() {
    
-    text(nameString, ((width / 2) -nameString.length()) /2, yPos);
+    textAlign(CENTER);
+    text(nameString, width/2, yPos );
+    //smooth();
    
   }  // end drawHead()
   
 }  // end Name
+
+// The subName class may be instantiated to create and place a subtitle on the first sheet of
+// music. It, too, takes two parameters--the String name and a float vertPos, which stores the
+// y-Coordinate of the title in the instantiated object.
+
+class subName {
+  
+  String subTitString;  // String to hold subtitle
+  float yPos;           // Float to store y-Coordinate
+  
+  subName(String sub, float vertPos) {
+    
+      subTitString = sub;
+      yPos = vertPos;
+      
+      PFont subTitle;      // Subtitle Typeface
+      subTitle = createFont("HelveticaNeue Thin", 16);
+      //subTitle = loadFont("HelveticaNeue-Thin-24.vlw");
+      textFont(subTitle);
+    
+  }  // end constructor
+  
+  void drawSub() {
+    
+      textAlign(CENTER);
+      
+      text(subTitString, width/2, yPos);
+      smooth();
+    
+  }  // end drawSub()
+  
+}  // end class SubName
 
 // The credLine class renders by-line credit underneath and right-aligned to the Name class.
 
@@ -33,31 +81,32 @@ class credLine {
   
    String nameString;  // Author name
    float yPos;        // Y-coordinate
-   float xPos;        // X-coordinate
    
    // credLine constructor
    
-   credLine(String name, float yCoord, float xCoord) {
+   credLine(String name, float yCoord) {
      
      nameString = name;
      yPos = yCoord;
-     xPos = xCoord; 
+     
+     PFont byLineType;
+     
+     byLineType = createFont("GoudySansITCbyBT Light", 14);
+     textFont(byLineType);
      
    }  // end credLine constructor
    
-   void writeByLine() {
+   void byDraw() {
      
-     text("By " + nameString,  yPos, xPos);
+     textAlign(RIGHT);
+     
+     text(nameString, width - 50, yPos);
      
    }  // end writeByLine
   
 }  // end credLine
 
-// The Staff class creates a staff positioned with passed parameters and draws the
-// staff centered horizontally on the page given a page width of 800 pixels with
-// a 50 pixel margin on either side of the staff.
-
-class Staff {
+/*class Staff {
   
   float above;  // Define the space above the staff.
   
@@ -119,4 +168,4 @@ class barLine {
   
  } 
   
-}  // end class barLine
+}  // end class barLine */
