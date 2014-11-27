@@ -91,7 +91,7 @@ class credLine {
      
      PFont byLineType;
      
-     byLineType = createFont("GoudySansITCbyBT Light", 14);
+     byLineType = createFont("Adobe Naskh", 26);
      textFont(byLineType);
      
    }  // end credLine constructor

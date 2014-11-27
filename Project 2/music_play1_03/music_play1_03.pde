@@ -54,23 +54,23 @@ void setup() {
 void draw() 
 {
   background(255);
-  Name Title = new Name("Anarchia Entrance Theme", 50.);
+  Name Title = new Name("Anarchia Entrance Theme", 40.);
   
   Title.drawHead();
   
-  subName subTitle = new subName("from Anarchia, by Hanon Reznikov, The Living Theatre", 75.);
+  subName subTitle = new subName("from Anarchia, by Hanon Reznikov, The Living Theatre", 60.);
   
   subTitle.drawSub();
   
   // Insert By-Line Credit
   
-  credLine byLine = new credLine("music by Robert Hieger", 125);
+  credLine byLine = new credLine("music by Robert Hieger", 100);
   
   byLine.byDraw();
   
-  image(anarchiaSystems[0], 65, 128);
-  image(anarchiaSystems[1], 20, 225);
-  image(anarchiaSystems[2], 20, 415);
-  image(anarchiaSystems[3], 20, 615);
+  image(anarchiaSystems[0], 65, 105);
+  image(anarchiaSystems[1], 20, 205);
+  image(anarchiaSystems[2], 20, 400);
+  image(anarchiaSystems[3], 20, 600);
   
 }
