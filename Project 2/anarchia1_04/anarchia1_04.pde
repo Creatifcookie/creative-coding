@@ -1,13 +1,13 @@
 /*
  **************************************************************************************************
  *                                                                                                *
- * music_play:                                                                                    *
+ * anarchia: (formerly music_play) new code branch                                                                                   *
  *                                                                                                *
  * Programmer: Robert Hieger                                                                      *
- * Music Play v1.03                                                                               *
+ * Music Play v1.04                                                                               *
  *                                                                                                *
- * Begun: November 23, 2014                                                                       *
- * Completed: November 26, 2014                                                                   *
+ * Begun: November 26, 2014
+ * Completed: ??????, 2014
  *                                                                                                *
  * Program Objectives:                                                                            *
  *                                                                                                *
@@ -17,9 +17,9 @@
  *                                                                                                *
  * VERY TALL ORDER, but somewhere to begin.                                                       *
  *                                                                                                *
- * In version 1.03, my goals are to:                                                              *
+ * In version 1.04, my goals are to:                                                              *
  *                                                                                                *
- * 1) Re-write musical notation classes to work with PImages and masks.                           *
+ * 1) Add masks to PImages to render music notation as it plays.                                  *
  *                                                                                                *
  * 2) Begin work on MIDI-rendering class library.                                                 *
  *                                                                                                *
