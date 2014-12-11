@@ -12,6 +12,8 @@ Sequencer seq;
 
 PFont pf;
 
+int[] metermap = {8, 8, 8, 8, 5, 5, 8, 8, 8, 8, 8, 8, 5, 5, 8, 8, 5, 5};
+
 void setup()
 {
   size(400, 400);
@@ -37,10 +39,22 @@ void draw()
   background(0);
   if (seq.isRunning())
   {
-    int ppq = seq.getSequence().getResolution(); // how many ticks per quarter?
+    int ppq = seq.getSequence().getResolution()/2; // how many ticks per eighth?
     long playheadraw = seq.getTickPosition(); // how many ticks are we into the file?
-    int beats = int(playheadraw/ppq); // which quarter note are we on?
-    text(beats, 100, 100);
+    int beats = int(playheadraw/ppq); // which eighth note are we on?
+    int measure = 0; // which measure am i on?
+    for(int i = 0;i<metermap.length;i++)
+    { 
+      beats = beats - metermap[i];
+      if(beats<0)
+      {
+        measure = i;
+        break; 
+      }
+        
+    }
+    
+    text(measure, 100, 100);
   }
 }
 

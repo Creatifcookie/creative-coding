@@ -1,13 +1,13 @@
 /*
  **************************************************************************************************
  *                                                                                                *
- * anarchia: (formerly music_play) new code branch                                                                                   *
+ * anarchia: (formerly music_play) new code branch                                                *
  *                                                                                                *
  * Programmer: Robert Hieger                                                                      *
  * Music Play v1.04                                                                               *
  *                                                                                                *
- * Begun: November 26, 2014
- * Completed: ??????, 2014
+ * Begun: November 26, 2014                                                                       *
+ * Completed: December 9, 2014                                                                    *
  *                                                                                                *
  * Program Objectives:                                                                            *
  *                                                                                                *
@@ -37,7 +37,8 @@ void setup() {
   size(800, 800);
   background(255);      // White
   
-    // Load music systems to anarchiaSystems PImage Array.
+    // Load music systems to anarchiaSystems PImage Array. This is brute force approach.
+    // My aim will be to abstract this into a class as well so that it may be 
   
     for (int i = 0; i < anarchiaSystems.length; i++) {
       
@@ -45,9 +46,9 @@ void setup() {
       
       anarchiaSystems[i] = loadImage("anarchia-system" + (i + 1) + ".png");
       
-     // println( "Loaded" + loadImage("anarchia-system" + (i + 1) + ".png") );
+     //println( "Loaded" + loadImage("anarchia-system" + (i + 1) + ".png") );
       
-    }  // end for
+    }  // end for*/
   
 }
 
@@ -68,9 +69,31 @@ void draw()
   
   byLine.byDraw();
   
-  image(anarchiaSystems[0], 65, 105);
-  image(anarchiaSystems[1], 20, 205);
-  image(anarchiaSystems[2], 20, 400);
-  image(anarchiaSystems[3], 20, 600);
+  image( anarchiaSystems[0], 65, 105 );
+  
+  /*****************************************************************
+   *  
+   * Adapted from code kindly provided by Luke DuBois
+   *
+   * 1) Create white rectangle to mask music system
+   *
+   * 2) Progressively reveal music system synchronized to MIDI file
+   *
+   *****************************************************************
+  */
+   
+  fill(255);    // Set fill of rectangle to white, same as sketch
+  noStroke();  //  Set stroke width to 0 for rectangle.
+  
+  // Draw static rectangle over first system.
+  
+  rect(65 + mouseX, 105, anarchiaSystems[0].width, anarchiaSystems[0].height);
+  
+  
+  
+  //image(anarchiaSystems[0], 65, 105);
+  //image(anarchiaSystems[1], 20, 205);
+  //image(anarchiaSystems[2], 20, 400);
+  //image(anarchiaSystems[3], 20, 600);
   
 }
