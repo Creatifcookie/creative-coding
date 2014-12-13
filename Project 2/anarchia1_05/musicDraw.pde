@@ -73,6 +73,41 @@ class subName {
   
 }  // end class SubName
 
+// the yearWritten class renders the year written credit underneath and left-aligned to the Name
+// and subName classes
+
+class yearWritten {
+  
+  String yearString;    // Year written
+  float yPos;           //
+ 
+ // yearWritten consturctor
+ 
+ yearWritten(String year, float vertPos) {
+   
+   yearString = year;  // Set year to parameter value.
+   yPos = vertPos;    // Set Y-coordinate to parameter value.
+   
+   // Define and size font for year written credit
+   
+   PFont yearType;    // Declare PFont for year written typeface.
+   
+   yearType = createFont("Adobe Naskh", 26);
+   textFont(yearType);
+   
+ }  // end yearWritten constructor
+ 
+ // Member method to place and draw year written credit.
+ 
+ void drawYear() {
+   
+  textAlign(LEFT);
+  text(yearString, width - 710, yPos);
+   
+ }  // end drawYear()
+ 
+}  // end yearWritten(String year, float vertPos)
+
 // The credLine class renders by-line credit underneath and right-aligned to the Name class.
 
 class credLine {
@@ -104,6 +139,10 @@ class credLine {
   
 }  // end credLine
 
+/*
+
+If this cannot be figured out in next iteration, this class abstraction will have to be triaged.
+
 class makeMusic {
   
   // Constructor
@@ -112,6 +151,6 @@ class makeMusic {
     
     //PImage[] name = arrayName[
     
-  }  // end constructor */
+  }  // end constructor
   
-} // end makeMusic
+} */ // end makeMusic

@@ -7,23 +7,22 @@
  * Music Play v1.05                                                                               *
  *                                                                                                *
  * Begun: December 9, 2014                                                                        *
- * Completed: ??????, 2014                                                                        *
+ * Completed: December 12, 2014                                                                   *
  *                                                                                                *
  * Program Objectives:                                                                            *
  *                                                                                                *
  * 1) Play a simple midi-based composition.                                                       *
  * 2) Display sheet music in sync with the music as it plays.                                     *
  * 3) Change background display in response to frequency and rhythm.                              *
- *                                                                                                *
- * VERY TALL ORDER, but somewhere to begin.                                                       *
+ *    NOTE: This feature may go to a wishlist in the interest of time.                            *
  *                                                                                                *
  * In version 1.05, my goals are to:                                                              *
  *                                                                                                *
- * 1) Finish PImage masking.                                                                      *
+ * 1) Finish PImage progressive reveal of music systems.                                          *
  *                                                                                                *
- * 2) Integrate MIDI playing without keyRelease() logic.                                          *
+ * 2) Add class to draw year written credit.                                                      *
  *                                                                                                *
- * 3) Abstract drawing of music systems into musicDraw classes                                    *
+ * 3) Integrate MIDI playing without keyRelease() logic.                                          *
  *                                                                                                *
  **************************************************************************************************
  */
@@ -59,10 +58,15 @@ int[] lastsystemshown = {
 
 // this is the starting system of each page, indexed by measure
 int[] whichpage = {
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-  7, 7, 7, 7, 7, 7, 7
-  
+  0, 0, 0, 0, 0,        // Page One
+  0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0,
+  4, 4, 4, 4, 4,        // Page Two
+  4, 4, 4, 4,
+  4, 4, 4, 4,
+  7, 7, 7, 7,          // Page Three
+  7, 7, 7
 };
 
 // these are the X offsets for the system images
@@ -79,11 +83,21 @@ int[] systemY = {
   105, 300
 };
 
-// measure X offset for rectangle mask
+// Measure X offset for rectangle mask
+// Each row of elements represents the ending point
+// in pixels for each measure so that the mask is
+// offset to reveal the measure.
+
 int[] measureX = {
-  296, 413, 521, 638, 755, 281, 479, 647, 750, 297, 427, 535, 644, 755, 411, 553, 663, 762,
-  10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000, 
-  10000,10000,10000,10000,10000,10000,10000
+  296, 413, 521, 638, 755,    // Page One
+  281, 480, 648, 762,
+  299, 427, 533, 642, 755,
+  411, 553, 665, 764,
+  296, 415, 528, 643, 765,    // Page Two
+  282, 454, 627, 766,
+  326, 459, 610,756, 
+  330, 465, 604,755,          // Page Three
+  426,649,765
 };
 
 int measure = 0; // this is the current measure on the sequence
@@ -150,10 +164,16 @@ void draw()
   subName subTitle = new subName("from Anarchia, by Hanon Reznikov, The Living Theatre", 60.);
 
   subTitle.drawSub();
+  
+  // Insert year written credit
+  
+  yearWritten written = new yearWritten("written 1995", 100.);
+  
+  written.drawYear();
 
   // Insert By-Line Credit
 
-  credLine byLine = new credLine("music by Robert Hieger", 100);
+  credLine byLine = new credLine("music by Robert Hieger", 100.);
 
   byLine.byDraw();
 
