@@ -4,9 +4,9 @@
  * anarchia: (formerly music_play) new code branch                                                *
  *                                                                                                *
  * Programmer: Robert Hieger                                                                      *
- * Music Play v1.06                                                                               *
+ * Music Play v1.06a                                                                               *
  *                                                                                                *
- * Begun: December 12, 2014                                                                       *
+ * Begun: December 13, 2014                                                                       *
  * Completed: December ??, 2014                                                                   *
  *                                                                                                *
  * Program Objectives:                                                                            *
@@ -16,7 +16,7 @@
  * 3) Change background display in response to frequency and rhythm.                              *
  *    NOTE: This feature may go to a wishlist in the interest of time.                            *
  *                                                                                                *
- * In version 1.06, my goals are to:                                                              *
+ * In version 1.06a, my goals are to:                                                             *
  *                                                                                                *
  * 1) Catch any remaining X-coordinate offset bugs on musical system reveal.                      *
  *                                                                                                *
@@ -148,7 +148,7 @@ int[] measureX = {
   281, 480, 648, 762,
   299, 427, 533, 642, 755,
   411, 553, 665, 764,
-  296, 415, 528, 643, 765,    // Page Two
+  295, 415, 528, 643, 765,    // Page Two
   282, 454, 627, 766,
   326, 459, 610,756, 
   330, 465, 603,755,          // Page Three
@@ -158,6 +158,8 @@ int[] measureX = {
 // Stores value for the current measure in the sequence as it plays.
 
 int measure = 0;
+
+PImage[] anarchiaSystems = new PImage[9];
 
 // Declare object of loadScore type
 
@@ -173,8 +175,6 @@ void setup() {
 
   //loadAnarchia = new loadScore(anarchiaSystems[9], "anarchia-system");
 
-  PImage[] anarchiaSystems = new PImage[9];
-  
   // Populate array.
   
   for (int i = 0; i < anarchiaSystems.length; i++) {
@@ -191,10 +191,39 @@ void setup() {
     
     startMidiSynth(); // start the internal MIDI synth
 
-   // Start the sequencer and load the MIDI file:
-   
+  // Start the sequencer and load the MIDI file:
+  
   initSequencer("anarchia-entrance.mid");
-
+  
+  // Start Sequence.
+  
+  startSeq();
+  
+  /*char midiState = ' ';      // Holds string equivalent value for boolen of keyPressed.
+  
+  switch(midiState) {
+    
+    case 'P':
+    case 'p':
+    
+      startSeq();
+      break;
+      
+    case 'S':
+    case 's':
+    
+      stopSeq();
+      break;
+      
+  default:
+   
+     PFont messageFont;
+     messageFont = createFont("HelveticaNeue Thin", 16);
+     textFont(messageFont);
+     text("Press P (p) to Play, S (s) to Stop", 35, 105);
+    
+  }  // end switch */
+  
 }  // end setup()
 
 void draw() {
@@ -273,4 +302,92 @@ void draw() {
 
   byLine.byDraw();  // Draw byLine.
   
+  /* DRAW SYSTEMS OF MUSICAL NOTATION. */
+  
+  // Set parameters for rectangle to be used as mask for musical systems.
+
+  fill(255);    // Set fill of rectangle to white, same as sketch.
+  noStroke();  //  Set stroke width to 0 for rectangle.
+  
+  // Draw (reveal) each measure synced to sequence.
+
+  for (int i = 0; i<anarchiaSystems.length; i++) {
+    
+    if(whichPage[measure] >= i) {
+      
+      rect(0, 105, width, height);
+      
+    }  // end if
+    
+    if (lastSystemShown[measure] >= i) {
+      
+      image(anarchiaSystems[i], systemX[i], systemY[i]);
+     
+    }  // end if
+    
+    if (lastSystemShown[measure] == i) {
+      
+      rect(measureX[measure], systemY[i], anarchiaSystems[i].width, anarchiaSystems[i].height);
+      
+    }  // end if
+    
+  }  // end for
+  
+  /***********************************************************************************************
+   *                                                                                             *
+   * DIAGNOSTIC DEVELOPMENT CODE                                                                 *
+   *                                                                                             *
+   * The following 2 lines of code print out what measure we are on and how many pixels inset    *
+   * to the right the mouse pointer is. This was used to determine the X-coordinate offset for   *
+   * the rendering of each measure revealed in the sketch window.                                *
+   *                                                                                             *
+   ***********************************************************************************************
+   */  
+    
+  print(measure + "\t");
+  println(mouseX);
+  
 }  // end draw()
+
+ // starSeq() Function
+ 
+ void startSeq() {
+ 
+   seq.setTickPosition(0);    // Rewind to beginning.
+   seq.start();               // Start sequence.
+
+}  // end startSeq()
+
+// Function seqStop()
+
+void stopSeq() {
+  
+  seq.stop();
+  stopMidiSynth();
+  
+}  // end seqStop()
+
+/*************************************************************************************************
+ *                                                                                               *
+ * keyPressed() Toggle:                                                                          *
+ *                                                                                               *
+ * The following keyPressed() method acts as a toggle. If pressed once, MIDI playback and        *
+ * synced score rendering stop. If pressed again, MIDI sequence is rewound to beginning and      *
+ * playback and rendering commence from start of sequence.                                       *
+ *                                                                                               *
+ *************************************************************************************************
+*/
+
+void keyPressed() {
+  
+  if ( seq.isRunning() && keyCode != 0xfff ) {    // Trap and eliminate Command key. NOTE: This does not work.
+   
+     stopSeq();
+   
+  }  else {
+    
+    startSeq();
+    
+  }  // end if-else
+  
+}  // end keyPressed()

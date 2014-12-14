@@ -7,7 +7,7 @@
  * Music Play v1.06                                                                               *
  *                                                                                                *
  * Begun: December 12, 2014                                                                       *
- * Completed: December ??, 2014                                                                   *
+ * Completed: December 13, 2014                                                                   *
  *                                                                                                *
  * Program Objectives:                                                                            *
  *                                                                                                *
