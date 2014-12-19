@@ -43,7 +43,6 @@ void initSequencer(String filename)
     Sequence mySeq = MidiSystem.getSequence(myMidiFile);
     // sequencer uses sequence:
     seq.setSequence(mySeq);
-    sequenceIsLoaded = true;
   }
   catch (Exception e) {
     e.printStackTrace();
